@@ -1,109 +1,56 @@
-# Anexos · Códigos para reconstruir la página de React
+# Dulce Horno · Página de React para repasar
 
-Son los mismos códigos de la S20 (Anexo B de la guía S21). Se pegan en un proyecto nuevo de [vite.new/react](https://vite.new/react) en este orden:
+Página web de una repostería ficticia, hecha con React y Vite. Sirve para repasar componentes, props, state y listas con un ejemplo completo que se puede abrir, tocar y adaptar al propio emprendimiento.
 
-| Código | Dónde se pega | Qué hacer antes |
-|---|---|---|
-| Código A | `src/components/Encabezado.jsx` | Crear la carpeta `components` (clic derecho sobre `src` → New Folder) y el archivo |
-| Código B | `src/components/ProductoCard.jsx` | Crear el archivo dentro de `components` |
-| Código C | `src/App.jsx` | Borrar todo lo que trae |
-| Código D | `src/App.css` | Borrar todo lo que trae |
+![React](https://img.shields.io/badge/React-18.3-61DAFB?logo=react&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-5.4-646CFF?logo=vite&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES_Modules-F7DF1E?logo=javascript&logoColor=black)
+![Node.js](https://img.shields.io/badge/Node.js-%3E%3D18-339933?logo=nodedotjs&logoColor=white)
+![Último commit](https://img.shields.io/github/last-commit/AlexRieger47/Taller-Presencial-Octubre-2026-JC)
 
-Después de pegarlos, cada estudiante cambia los textos de Dulce Horno por los de su emprendimiento.
+## Ruta rápida
 
----
+Requisito: tener instalado [Node.js](https://nodejs.org/) 18 o superior. Para comprobarlo, ejecutar `node -v` en la terminal.
 
-## Código A · `src/components/Encabezado.jsx`
+1. Abrir una terminal en la carpeta del proyecto (la que contiene `package.json`).
+2. Instalar las dependencias: `npm install`
+3. Encender la página: `npm run dev`
+4. Abrir en el navegador la dirección que aparece en la terminal, normalmente `http://localhost:5173`.
 
-```jsx
-function Encabezado() {
+Resultado esperado: la página de Dulce Horno con sus productos. Cada cambio guardado en `src/` se ve al instante, sin recargar.
 
-   const nombre = 'Dulce Horno';
+## Qué hay en el repositorio
 
-   return (
-      <header className="encabezado">
-         <h1>{nombre}</h1>
-         <p>Repostería artesanal en Medellín</p>
-      </header>
+| Ruta | Qué contiene |
+|---|---|
+| `src/App.jsx` | La página completa: junta todas las piezas |
+| `src/components/` | Las piezas de la página: encabezado, foto principal, filtros, tarjetas y pie |
+| `src/data/productos.js` | La lista de productos y categorías |
+| `src/App.css` | Colores, letras y formas |
+| `docs/FAQ.md` | Preguntas frecuentes: dónde está cada cosa y por qué funciona así |
+| `docs/ANEXO.md` | Los cuatro códigos base de la S20 para reconstruir la página desde cero |
 
-   );
-}
+## Por dónde empezar
 
-export default Encabezado;
-```
+1. Leer `src/App.jsx`: muestra cómo se arma la página.
+2. Abrir `src/components/ProductoCard.jsx` y probar el botón «Agregar al pedido»: ahí vive el state.
+3. Cambiar un precio en `src/data/productos.js` y ver el cambio en el navegador.
 
-## Código B · `src/components/ProductoCard.jsx`
+¿Alguna duda en el camino? Casi seguro está respondida en `docs/FAQ.md`.
 
-```jsx
-import { useState } from 'react';
+## Qué no incluye
 
-function ProductoCard(props) {
-   const [cantidad, setCantidad] = useState(0);
+- **Base de datos ni API:** los productos están escritos a mano en `src/data/productos.js`. La conexión con MongoDB se explica en `docs/FAQ.md` § 7.
+- **Fotos propias:** las imágenes se cargan desde Unsplash, así que la página necesita internet para mostrarlas.
 
-   return (
-      <article className="tarjeta">
-         <h3>{props.nombre}</h3>
-         <p>{props.descripcion}</p>
-         <p className="precio">{props.precio}</p>
+## Comandos disponibles
 
-         <button onClick={() => setCantidad(cantidad + 1)}>
-             Agregar al pedido
+| Comando | Para qué sirve |
+|---|---|
+| `npm run dev` | Encender la página mientras se trabaja |
+| `npm run build` | Preparar la versión final en la carpeta `dist/` |
+| `npm run preview` | Ver esa versión final antes de publicarla |
 
-         </button>
-         <p>En tu pedido: {cantidad}</p>
-      </article>
-   );
-}
+## Siguiente paso
 
-export default ProductoCard;
-```
-
-## Código C · `src/App.jsx`
-
-```jsx
-import './App.css';
-import Encabezado from './components/Encabezado.jsx';
-import ProductoCard from './components/ProductoCard.jsx';
-
-function App() {
-   return (
-      <main>
-         <Encabezado />
-
-         <ProductoCard
-             nombre="Torta de chocolate"
-             descripcion="Bizcocho húmedo con ganache"
-             precio="$45.000"
-
-         />
-         <ProductoCard
-
-             nombre="Galletas de avena"
-             descripcion="Caja x 12"
-             precio="$18.000"
-         />
-         <ProductoCard
-             nombre="Cupcakes de vainilla"
-             descripcion="Caja x 6"
-             precio="$30.000"
-         />
-      </main>
-   );
-}
-
-export default App;
-```
-
-## Código D · `src/App.css`
-
-```css
-main { max-width: 800px; margin: 0 auto; padding: 24px;
-
-    font-family: sans-serif; }
-.encabezado { text-align: center; margin-bottom: 24px; }
-.tarjeta { border: 1px solid #ddd; border-radius: 12px;
-
-    padding: 16px; margin-bottom: 16px; }
-.precio { font-weight: bold; }
-button { padding: 8px 16px; cursor: pointer; }
-```
+Adaptar la página al propio emprendimiento siguiendo `docs/FAQ.md` § 8, «¿Qué cambio primero?».
